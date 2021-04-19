@@ -21,7 +21,7 @@ al        } else if (indexOfArr === 0) {
             newArr.push(arr[i])
         }
        //return that new array
-       console.log('this is newArr: ', newArr)
+    //    console.log('this is newArr: ', newArr)
        return newArr
     }
 

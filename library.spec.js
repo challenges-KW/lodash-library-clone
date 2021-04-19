@@ -92,5 +92,13 @@ describe('Library', ()=> {
            })
            expect(resultArray).toStrictEqual(['0:0', '1:1', '4:2', '25:3', '16:4'])    
        } )
+
+       test('Should provide access to the original array passed to it', () => {
+           let testArr = []
+           _.foreach(uniqueArray, (element) => {
+               testArr.push([element, index])
+           })
+           expect(testArr[0]).toStrictEqual([0, 0,[0, 1, 2, 5, 4]])
+        })
     })
 })
