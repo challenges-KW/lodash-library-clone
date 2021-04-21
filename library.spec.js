@@ -90,15 +90,14 @@ describe('Library', ()=> {
 
            _.foreach(uniqueArray, (element, index) => {
                resultArray.push(testFunction(element) + ':' + index)
-               console.log(resultArray)
            })
-           expect(resultArray).toEqual(['0:0', '1:1', '4:2', '25:3', '16:4'])    
+           expect(resultArray).toStrictEqual(['0:0', '1:1', '4:2', '25:3', '16:4'])    
        } )
 
        test('Should provide access to the original array passed to it', () => {
            let testArr = []
-           _.foreach(uniqueArray, (element) => {
-               testArr.push([element, index])
+           _.foreach(uniqueArray, (element, index) => {
+               testArr.push([element, index, uniqueArray])
            })
            expect(testArr[0]).toStrictEqual([0, 0,[0, 1, 2, 5, 4]])
         })
