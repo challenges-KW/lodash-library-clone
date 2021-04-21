@@ -101,5 +101,23 @@ describe('Library', ()=> {
            })
            expect(testArr[0]).toStrictEqual([0, 0,[0, 1, 2, 5, 4]])
         })
+
+        test('Should provide access on each value in an object', () => {
+            let resultObj = {a : 'a', b: 'b'}
+            let resultArray = []
+             _.foreach(resultObj, (value) => {
+                 resultArray.push(testFunction(value + 'ye'))
+             })
+             expect(resultArray).toStrictEqual(['aye', 'bye']) 
+         })
+
+         test('Should provide access to each key and the original object passed to it', () => {
+            let testArr = []
+            let resultObj = {a : 'a', b: 'b'}
+            _.foreach(resultObj, (value, key) => {
+                testArr.push([value, key, testObj])
+            })
+            expect(testArr[0]).toStrictEqual(['a', 'a', resultArray])
+         })
     })
 })
