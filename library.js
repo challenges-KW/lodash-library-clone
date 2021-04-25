@@ -14,9 +14,8 @@ module.exports = {
                 }
             return newArr
         }
-
-},
-last: function (arr, indexOfArr) {
+    },
+    last: function (arr, indexOfArr) {
             if (arguments.length === 1) {
                 return arr[arr.length - 1]
             } else if (indexOfArr === 0) {
@@ -45,18 +44,14 @@ last: function (arr, indexOfArr) {
             }
         }
     },
-    indexOf: function(arr, element) {
-//refactor using foreach method
-
-        // loop through  the array
-        for (let i = 0; i < arr.length; i++) {
-
-        // compare the element that was passed in against the other elements in the array
-        if (arr[i] === element) {
-        //if you find it, return its index
-            return i
-        }
-        //Todo: what happens if it is not found?
+    indexOf: function(arrOrObj, element) {
+        //loop through arrOrObj
+        for (let i=0; i<arrOrObj.length; i++) {
+        //check if element === arrOrObj[i]
+            if (arrOrObj[i] === element) {
+            //if yes, turn index
+                return i
+            }
         }
         return -1
     }

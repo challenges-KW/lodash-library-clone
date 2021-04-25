@@ -109,7 +109,7 @@ describe('Library', ()=> {
     describe('indexOf', () => {        
         test('Should show index number of given element', () => {
 
-           expect(_.indexOf(uniqueArray, 5)).toStrictEqual(1)
+           expect(_.indexOf(uniqueArray, 0)).toStrictEqual(0)
         })
         
         test('Should show index number of the first element it encounters in the array', () => {
