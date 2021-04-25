@@ -45,14 +45,30 @@ module.exports = {
         }
     },
     indexOf: function(arrOrObj, element) {
-        //loop through arrOrObj
-        for (let i=0; i<arrOrObj.length; i++) {
-        //check if element === arrOrObj[i]
-            if (arrOrObj[i] === element) {
-            //if yes, turn index
-                return i
+        //IMPLEMENTATION WITH FOREACH
+        //declare as variable
+        let indexOfArrOrObj = -1
+        //loop through using foreach
+        this.foreach(arrOrObj, (elementInArrOrObj, index) => {
+            //check to see if elementInArrOrObj === element
+            if (elementInArrOrObj === element && indexOfArrOrObj < 0) {
+                //reassign variable
+                indexOfArrOrObj = index
+                //return index
+                return indexOfArrOrObj
             }
-        }
-        return -1
+        })
+        return indexOfArrOrObj;
+
+        //IMPLEMENTION WITH FOR LOOP
+        // //loop through arrOrObj
+        // for (let i=0; i<arrOrObj.length; i++) {
+        // //check if element === arrOrObj[i]
+        //     if (arrOrObj[i] === element) {
+        //     //if yes, turn index
+        //         return i
+        //     }
+        // }
+        // return -1
     }
 }
