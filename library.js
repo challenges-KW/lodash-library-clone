@@ -71,7 +71,14 @@ module.exports = {
         // }
         // return -1
     },
-    map: function(arrOrObj) {
-        return arrOrObj
+    map: function(arrOrObj, funct) {
+        let result = []
+        //loop through array
+        for (let i=0; i<arrOrObj.length; i++){
+        //apply callback conditions to each element
+            result.push(funct(arrOrObj[i]))
+        }
+        //return new array
+        return result
     }
 }

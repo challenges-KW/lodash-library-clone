@@ -121,15 +121,14 @@ describe('Library', ()=> {
         })
     })
 
-    describe('map function', () => {
+    describe('map', () => {
 
         test('Should return an array', () => {
-            expect(Array.isArray(_.map(uniqueArray))).toBe(true)
+            expect(Array.isArray(_.map(uniqueArray, testFunction))).toBe(true)
         })
 
         test('Should modify the elements in the array by the callback conditions', () => {
-            let multiply = x => x * x 
-            let expectedResults = _.map(uniqueArray, multiply)
+            let expectedResults = _.map(uniqueArray, testFunction)
 
             expect(expectedResults).toStrictEqual([0, 25, 1, 4, 25, 16, 25])
 
