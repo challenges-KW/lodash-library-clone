@@ -70,5 +70,8 @@ module.exports = {
         //     }
         // }
         // return -1
+    },
+    map: function(arrOrObj) {
+        return arrOrObj
     }
 }

@@ -117,8 +117,22 @@ describe('Library', ()=> {
             expect(_.indexOf(uniqueArray, 5)).toStrictEqual(1)
          })
         test('Should return -1 if element not found in array', () => {
-
             expect(_.indexOf(uniqueArray, 7)).toStrictEqual(-1)
+        })
+    })
+
+    describe('map function', () => {
+
+        test('Should return an array', () => {
+            expect(Array.isArray(_.map(uniqueArray))).toBe(true)
+        })
+
+        test('Should modify the elements in the array by the callback conditions', () => {
+            let multiply = x => x * x 
+            let expectedResults = _.map(uniqueArray, multiply)
+
+            expect(expectedResults).toStrictEqual([0, 25, 1, 4, 25, 16, 25])
+
         })
     })
 })
