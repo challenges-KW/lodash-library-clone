@@ -133,5 +133,26 @@ describe('Library', ()=> {
             expect(expectedResults).toStrictEqual([0, 25, 1, 4, 25, 16, 25])
 
         })
+
+        xtest('Should modify the elements when passed in a named callback', () => {
+
+            let arr = [1, 2, 3, 4, 5]
+
+            let mapElements = el => {el : el}
+
+            // let mapElements = el => `{ ${el} : ${el} }`
+
+            expect(_.map(arr, mapElements)).toStrictEqual([{1 : 1} ,{2 : 2}, {3 : 3}, {4 : 4}, {5 : 5}])
+        })
+    })
+
+    describe('filter', () => {
+        let stringArray = ['cat','dog', 'rabbit', 'ferret']
+        let filterString = word => word.length > 5;
+
+        test('Should return array with only the string elements that pass the test implemented by the callback', () => {
+            expect(_.filter(stringArray, filterString)).toStrictEqual(['rabbit', 'ferret'])
+        })
+
     })
 })

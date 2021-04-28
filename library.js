@@ -71,14 +71,30 @@ module.exports = {
         // }
         // return -1
     },
-    map: function(arrOrObj, funct) {
+
+    map: function(arrOrObj, callback) {
         let result = []
         //loop through array
-        for (let i=0; i<arrOrObj.length; i++){
+        this.foreach(arrOrObj, (elementInArrOrObj) => {
         //apply callback conditions to each element
-            result.push(funct(arrOrObj[i]))
-        }
+            result.push((callback(elementInArrOrObj)))
+        })
+
         //return new array
         return result
-    }
+    },
+    filter: function(arrObjOrString, callback) {
+        let result = []
+        //loop through array using foreach
+        this.foreach(arrObjOrString, (elementInArrObjOrString) => {
+            //if true for conditions of callback, push element into result array
+            if (callback(elementInArrObjOrString))
+            {
+                result.push(elementInArrObjOrString)
+                return result
+            }
+
+        })
+        return result
+    },
 }
