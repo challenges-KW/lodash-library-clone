@@ -134,24 +134,38 @@ describe('Library', ()=> {
 
         })
 
-        xtest('Should modify the elements when passed in a named callback', () => {
+        test('Should modify the elements when passed in a named callback', () => {
 
-            let arr = [1, 2, 3, 4, 5]
+            let arr = [1,2,3,4,5]
 
-            let mapElements = el => {el : el}
+             let mapElements = el => el + 1
 
-            // let mapElements = el => `{ ${el} : ${el} }`
+            expect(_.map(arr, mapElements)).toStrictEqual([2,3,4,5,6])
+        })
 
-            expect(_.map(arr, mapElements)).toStrictEqual([{1 : 1} ,{2 : 2}, {3 : 3}, {4 : 4}, {5 : 5}])
+        test('Should modify the elements when passed in a named callback with obj', () => {
+
+            let arr = [1,2,3,4,5]
+
+            let mapElementsToObj = (el) => {
+                return {[el] : el}
+            }
+
+            expect(_.map(arr, mapElementsToObj)).toStrictEqual([{1 : 1} ,{2 : 2}, {3 : 3}, {4 : 4}, {5 : 5}])
         })
     })
 
     describe('filter', () => {
-        let stringArray = ['cat','dog', 'rabbit', 'ferret']
-        let filterString = word => word.length > 5;
+        let array = ['cat','dog', 'rabbit', 'ferret']
+        let filterArray = word => word.length > 5
+        let objt = {0:0, 1:1, 2:2, 3:3}
+        let filterObjt = el => el < 1
 
-        test('Should return array with only the string elements that pass the test implemented by the callback', () => {
-            expect(_.filter(stringArray, filterString)).toStrictEqual(['rabbit', 'ferret'])
+        test('Should return array with only the array elements that pass the test implemented by the callback', () => {
+            expect(_.filter(array, filterArray)).toStrictEqual(['rabbit', 'ferret'])
+        })
+        test('Should return array with only the object elements that pass the test implemented by the callback', () => {
+            expect(_.filter(objt, filterObjt)).toStrictEqual([{0:0, 1:1, 2:2}])
         })
 
     })

@@ -77,19 +77,27 @@ module.exports = {
         //loop through array
         this.foreach(arrOrObj, (elementInArrOrObj) => {
         //apply callback conditions to each element
-            result.push((callback(elementInArrOrObj)))
+        result.push((callback(elementInArrOrObj, arrOrObj[elementInArrOrObj])))
         })
-
         //return new array
+        console.log(result)
         return result
     },
     filter: function(arrObjOrString, callback) {
         let result = []
         //loop through array using foreach
         this.foreach(arrObjOrString, (elementInArrObjOrString) => {
-            //if true for conditions of callback, push element into result array
+            //if true for conditions of callback, push element into result array    
             if (callback(elementInArrObjOrString))
             {
+                for (const key in elementInArrObjOrString) {
+                    if (callback(elementInArrObjOrString[key])) {
+                        result.push(arrObjOrString[elementInArrObjOrString], elementInArrObjOrString)
+                    }
+                    console.log('key: ', arrObjOrString[elementInArrObjOrString])
+                    console.log('value: ', elementInArrObjOrString)
+
+                }    
                 result.push(elementInArrObjOrString)
                 return result
             }
