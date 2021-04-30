@@ -164,12 +164,21 @@ describe('Library', ()=> {
                 return {[el]:el}
             }
         }
+        let users = [  { 'user': 'barney', 'age': 36, 'active': true },
+        { 'user': 'fred',   'age': 40, 'active': false } ]
+        let funct = (o) => {
+            { return !o.active }
+        }
 
         test('Should return array with only the array elements that pass the test implemented by the callback', () => {
             expect(_.filter(array, filterArray)).toStrictEqual(['rabbit', 'ferret'])
         })
         test('Should return array with only the elements of the parameter object that pass the test implemented by the callback', () => {
             expect(_.filter(objt, filterObjt)).toStrictEqual([{0:0}])
+        })
+
+        test('Should return array with only the elements of the parameter object that passes the test implemented by the callback 2', () => {
+            expect(_.filter(users, funct)).toStrictEqual([{ 'user': 'fred',   'age': 40, 'active': false }])
         })
 
     })
