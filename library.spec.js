@@ -159,13 +159,17 @@ describe('Library', ()=> {
         let array = ['cat','dog', 'rabbit', 'ferret']
         let filterArray = word => word.length > 5
         let objt = {0:0, 1:1, 2:2, 3:3}
-        let filterObjt = el => el < 1
+        let filterObjt = (el) => {
+            if (el < 1) {
+                return {[el]:el}
+            }
+        }
 
         test('Should return array with only the array elements that pass the test implemented by the callback', () => {
             expect(_.filter(array, filterArray)).toStrictEqual(['rabbit', 'ferret'])
         })
-        test('Should return array with only the object elements that pass the test implemented by the callback', () => {
-            expect(_.filter(objt, filterObjt)).toStrictEqual([{0:0, 1:1, 2:2}])
+        test('Should return array with only the elements of the parameter object that pass the test implemented by the callback', () => {
+            expect(_.filter(objt, filterObjt)).toStrictEqual([{0:0}])
         })
 
     })

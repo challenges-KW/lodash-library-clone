@@ -87,21 +87,18 @@ module.exports = {
         let result = []
         //loop through array using foreach
         this.foreach(arrObjOrString, (elementInArrObjOrString) => {
-            //if true for conditions of callback, push element into result array    
+            //check if true for conditions of callback
             if (callback(elementInArrObjOrString))
             {
-                for (const key in elementInArrObjOrString) {
-                    if (callback(elementInArrObjOrString[key])) {
-                        result.push(arrObjOrString[elementInArrObjOrString], elementInArrObjOrString)
-                    }
-                    console.log('key: ', arrObjOrString[elementInArrObjOrString])
-                    console.log('value: ', elementInArrObjOrString)
-
-                }    
-                result.push(elementInArrObjOrString)
-                return result
+                //if arrOrObjOrString is an array, push elementInArrObjOrString into result array
+                if (Array.isArray(arrObjOrString)) {
+                    result.push(elementInArrObjOrString)
+                }
+                //if arrOrObjOrString is NOT an array, push callback/elementInArrObjOrString into result array
+                else {
+                    result.push(callback(elementInArrObjOrString))
+                }
             }
-
         })
         return result
     },
