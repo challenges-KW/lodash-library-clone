@@ -88,18 +88,23 @@ module.exports = {
         //loop through array using foreach
         this.foreach(arrObjOrString, (elementInArrObjOrString) => {
             //check if true for conditions of callback
-            if (callback(elementInArrObjOrString))
-            {
-                //if arrOrObjOrString is an array, push elementInArrObjOrString into result array
-                if (Array.isArray(arrObjOrString)) {
-                    result.push(elementInArrObjOrString)
-                }
-                //if arrOrObjOrString is NOT an array, push callback/elementInArrObjOrString into result array
-                else {
-                    result.push(callback(elementInArrObjOrString))
-                }
+            if (callback(elementInArrObjOrString)){
+                result.push(elementInArrObjOrString)
             }
         })
         return result
     },
+    reject: function(arrObjOrString, callback) {
+        result = []
+        this.filter(arrObjOrString, (elementInArrObjOrString) => {
+            if(!callback(elementInArrObjOrString)) {
+                // console.log(elementInArrObjOrString)
+                // console.log('this filter: ', this.filter)
+                // console.log('result: ', result)
+                result.push(elementInArrObjOrString)
+                console.log('result after push: ', result)
+            }     
+        } ) 
+    return result
+    }
 }

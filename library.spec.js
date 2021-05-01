@@ -14,6 +14,11 @@ describe('Library', ()=> {
         testArr = []
         testFunction = x => x * x
         resultObj = {a : 'a', b: 'b'}
+        result = []
+    })
+
+    afterEach(() => {
+        result = []
     })
 
     describe('identity', () => {
@@ -158,27 +163,61 @@ describe('Library', ()=> {
     describe('filter', () => {
         let array = ['cat','dog', 'rabbit', 'ferret']
         let filterArray = word => word.length > 5
-        let objt = {0:0, 1:1, 2:2, 3:3}
-        let filterObjt = (el) => {
-            if (el < 1) {
-                return {[el]:el}
-            }
+        let objt = [{'one': 1, 0:0, 1:1, 2:2, 3:3}, {'one': 0, 'two' :1}]
+        let filterObjt = (obj) => {
+            
+                return obj['one'] < 1
+            
         }
         let users = [  { 'user': 'barney', 'age': 36, 'active': true },
         { 'user': 'fred',   'age': 40, 'active': false } ]
         let funct = (o) => {
             { return !o.active }
         }
-
+        
         test('Should return array with only the array elements that pass the test implemented by the callback', () => {
             expect(_.filter(array, filterArray)).toStrictEqual(['rabbit', 'ferret'])
         })
-        test('Should return array with only the elements of the parameter object that pass the test implemented by the callback', () => {
-            expect(_.filter(objt, filterObjt)).toStrictEqual([{0:0}])
+        test('Should return object with only the elements of the parameter object that pass the test implemented by the callback', () => {
+            console.log('Filtered object => ', _.filter(objt, filterObjt))
+          
+            expect(_.filter(objt, filterObjt)).toStrictEqual([{'one': 0, 'two' :1}])
+            
         })
 
         test('Should return array with only the elements of the parameter object that passes the test implemented by the callback 2', () => {
             expect(_.filter(users, funct)).toStrictEqual([{ 'user': 'fred',   'age': 40, 'active': false }])
+        })
+
+    })
+
+    describe('reject', () => {
+        let array = ['cat','dog', 'rabbit', 'ferret']
+        let rejectArray = word => word.length > 5
+        let objt = [{'one': 1, 0:0, 1:1, 2:2, 3:3}, {'one': 0, 'two' :1}]
+        let rejectObjt = (obj) => {
+            
+                return obj['one'] < 1
+            
+        }
+        let users = [  { 'user': 'barney', 'age': 36, 'active': true },
+        { 'user': 'fred',   'age': 40, 'active': false } ]
+        let funct = (o) => {
+            { return !o.active }
+        }
+        
+        test('Should return array without  the array elements that pass the test implemented by the callback', () => {
+            expect(_.reject(array, rejectArray)).toStrictEqual(['cat', 'dog'])
+        })
+        test('Should return object without  the elements of the parameter object that pass the test implemented by the callback', () => {
+            console.log('Filtered object => ', _.filter(objt, rejectObjt))
+          
+            expect(_.reject(objt, rejectObjt)).toStrictEqual([{'one': 1, 0:0, 1:1, 2:2, 3:3}])
+            
+        })
+
+        test('Should return array with only the elements of the parameter object that passes the test implemented by the callback 2', () => {
+            expect(_.reject(users, funct)).toStrictEqual([{ 'user': 'barney', 'age': 36, 'active': true }])
         })
 
     })
