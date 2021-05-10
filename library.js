@@ -80,7 +80,6 @@ module.exports = {
         result.push((callback(elementInArrOrObj, arrOrObj[elementInArrOrObj])))
         })
         //return new array
-        console.log(result)
         return result
     },
     filter: function(arrObjOrString, callback) {
@@ -95,16 +94,6 @@ module.exports = {
         return result
     },
     reject: function(arrObjOrString, callback) {
-        result = []
-        this.filter(arrObjOrString, (elementInArrObjOrString) => {
-            if(!callback(elementInArrObjOrString)) {
-                // console.log(elementInArrObjOrString)
-                // console.log('this filter: ', this.filter)
-                // console.log('result: ', result)
-                result.push(elementInArrObjOrString)
-                console.log('result after push: ', result)
-            }     
-        } ) 
-    return result
+        return this.filter(arrObjOrString, elementInArrObjOrString => !callback(elementInArrObjOrString));
     }
 }

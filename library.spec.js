@@ -1,6 +1,6 @@
 const _ = require('./library.js')
 
-describe('Library', ()=> {
+describe('Library', () => {
     let uniqueArray
     const uniqueObject = {}
     let resultArray
@@ -14,11 +14,6 @@ describe('Library', ()=> {
         testArr = []
         testFunction = x => x * x
         resultObj = {a : 'a', b: 'b'}
-        result = []
-    })
-
-    afterEach(() => {
-        result = []
     })
 
     describe('identity', () => {
@@ -179,7 +174,6 @@ describe('Library', ()=> {
             expect(_.filter(array, filterArray)).toStrictEqual(['rabbit', 'ferret'])
         })
         test('Should return object with only the elements of the parameter object that pass the test implemented by the callback', () => {
-            console.log('Filtered object => ', _.filter(objt, filterObjt))
           
             expect(_.filter(objt, filterObjt)).toStrictEqual([{'one': 0, 'two' :1}])
             
@@ -210,7 +204,7 @@ describe('Library', ()=> {
             expect(_.reject(array, rejectArray)).toStrictEqual(['cat', 'dog'])
         })
         test('Should return object without  the elements of the parameter object that pass the test implemented by the callback', () => {
-            console.log('Filtered object => ', _.filter(objt, rejectObjt))
+            // console.log('Filtered object => ', _.filter(objt, rejectObjt))
           
             expect(_.reject(objt, rejectObjt)).toStrictEqual([{'one': 1, 0:0, 1:1, 2:2, 3:3}])
             
@@ -221,4 +215,117 @@ describe('Library', ()=> {
         })
 
     })
+
+    describe('reduce', () => {
+
+        it('should return a value', () => {
+          let result = _.reduce([3, 2, 1], (memo, item) =>{ return item; });
+          expect(result).to.be.defined;
+        });
+  
+        it('should not mutate the input array', () => {
+          let input = [1, 2, 3, 4, 5];
+          let result = _.reduce(input, (memo, item) =>{ 
+              return item; });
+          
+          /*
+           * Mutation of inputs should be avoided without good justification otherwise
+           * as it can often lead to hard to find bugs and confusing code!
+           * Imagine we were reading the code above, and we added the following line:
+           *
+           * let lastElement = input[input.length - 1];
+           *
+           * Without knowing that mutation occured inside of _.reduce,
+           * we would assume that `lastElement` is 5. But if inside of
+           * _.reduce, we use the array method `pop`, we would permanently
+           * change `input` and our assumption would not longer be true,
+           * `lastElement` would be 4 instead!
+           *
+           * The tricky part is that we have no way of knowing about the mutation
+           * just by looking at the code above. We'd have to dive into the
+           * implementation of _.reduce to the exact line that uses `pop`.
+           * If we write a lot of code with this assumption, it might be very hard
+           * to trace back to the correct line in _.reduce.
+           *
+           * You can avoid an entire class of bugs by writing s
+           * that don't mutate their inputs!
+           */
+  
+          expect(input).to.eql([1, 2, 3, 4, 5]);
+        });
+  
+        it('should invoke the iterator  with arguments (memo, item) in that order', () => {
+          let memoInCallback, itemInCallback;
+  
+          _.reduce(['item'], (memo, item) =>{
+            memoInCallback = memo;
+            itemInCallback = item;
+          }, 'memo');
+  
+          expect(memoInCallback).to.equal('memo');
+          expect(itemInCallback).to.equal('item');
+        });
+  
+        it('should pass items of the array into the iterator from left to right', () => {
+          let orderTraversed = [];
+  
+          _.reduce([1, 2, 3, 4], (memo, item) =>{
+            orderTraversed.push(item);
+            return memo;
+          }, 10);
+  
+          expect(orderTraversed).to.eql([1, 2, 3, 4]);
+        });
+  
+        it('should continue to call iterator even if the iterator returns undefined', () => {
+          let callCount = 0;
+          let returnFalsy = (total, item) =>{
+            callCount++;
+            if (callCount === 1) {
+              return undefined;
+            } else {
+              return item + 1;
+            }
+          };
+  
+          let total = _.reduce([1, 1, 2], returnFalsy);
+          expect(total).to.equal(3);
+        });
+  
+        it('should pass every item of the array into the iterator if a memo is passed in', () => {
+          let result = _.reduce([1, 2, 3], (memo, item) =>{
+            return memo - item;
+          }, 10);
+  
+          expect(result).to.equal(4);
+        });
+  
+        it('Fill me in with a description of the behavior this test is checking for', () => {
+          let result = _.reduce([1, 2, 3], (memo, item) =>{
+            return memo * item;
+          }, 0);
+  
+          expect(result).to.equal(0);
+        });
+  
+        it('should set memo to be the first item of the array if no memo is passed in', () => {
+          let result = _.reduce([1, 2, 3], (memo, item) =>{
+            return memo;
+          });
+  
+          expect(result).to.equal(1);
+        });
+  
+  
+        it('should pass the second item of the array into the iterator first if a memo is not passed in', () => {
+          let result = _.reduce([3, 2, 1], (memo, item) =>{
+            return memo - item;
+          });
+  
+          expect(result).to.equal(0);
+        });
+  
+      });
+
+    
 })
