@@ -44,27 +44,27 @@ module.exports = {
             }
         }
     },
-    indexOf: function(arrOrObj, element) {
+    indexOf: function(arr, element) {
         //IMPLEMENTATION WITH FOREACH
         //declare as variable
-        let indexOfArrOrObj = -1
+        let indexOfArr = -1
         //loop through using foreach
-        this.foreach(arrOrObj, (elementInArrOrObj, index) => {
-            //check to see if elementInArrOrObj === element
-            if (elementInArrOrObj === element && indexOfArrOrObj < 0) {
+        this.foreach(arr, (elementInArr, index) => {
+            //check to see if elementInArr === element
+            if (elementInArr === element && indexOfArr < 0) {
                 //reassign variable
-                indexOfArrOrObj = index
+                indexOfArr = index
                 //return index
-                return indexOfArrOrObj
+                return indexOfArr
             }
         })
-        return indexOfArrOrObj;
+        return indexOfArr;
 
         //IMPLEMENTION WITH FOR LOOP
-        // //loop through arrOrObj
-        // for (let i=0; i<arrOrObj.length; i++) {
-        // //check if element === arrOrObj[i]
-        //     if (arrOrObj[i] === element) {
+        // //loop through arr
+        // for (let i=0; i<arr.length; i++) {
+        // //check if element === arr[i]
+        //     if (arr[i] === element) {
         //     //if yes, turn index
         //         return i
         //     }
@@ -95,5 +95,10 @@ module.exports = {
     },
     reject: function(arrObjOrString, callback) {
         return this.filter(arrObjOrString, elementInArrObjOrString => !callback(elementInArrObjOrString));
+    },
+    reduce: function(arrOrObj, callback, initialValue) {
+        let accumulator = initialValue;
+        
+
     }
 }

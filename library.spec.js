@@ -217,13 +217,13 @@ describe('Library', () => {
     })
 
     describe('reduce', () => {
-
-        it('should return a value', () => {
+//takes four arguments -- accumulator, current value, current index, source array
+        xit('should return a value', () => {
           let result = _.reduce([3, 2, 1], (memo, item) =>{ return item; });
           expect(result).to.be.defined;
         });
   
-        it('should not mutate the input array', () => {
+        xit('should not mutate the input array', () => {
           let input = [1, 2, 3, 4, 5];
           let result = _.reduce(input, (memo, item) =>{ 
               return item; });
@@ -254,7 +254,7 @@ describe('Library', () => {
           expect(input).to.eql([1, 2, 3, 4, 5]);
         });
   
-        it('should invoke the iterator  with arguments (memo, item) in that order', () => {
+        xit('should invoke the iterator  with arguments (memo, item) in that order', () => {
           let memoInCallback, itemInCallback;
   
           _.reduce(['item'], (memo, item) =>{
@@ -266,7 +266,7 @@ describe('Library', () => {
           expect(itemInCallback).to.equal('item');
         });
   
-        it('should pass items of the array into the iterator from left to right', () => {
+        xit('should pass items of the array into the iterator from left to right', () => {
           let orderTraversed = [];
   
           _.reduce([1, 2, 3, 4], (memo, item) =>{
@@ -277,7 +277,7 @@ describe('Library', () => {
           expect(orderTraversed).to.eql([1, 2, 3, 4]);
         });
   
-        it('should continue to call iterator even if the iterator returns undefined', () => {
+        xit('should continue to call iterator even if the iterator returns undefined', () => {
           let callCount = 0;
           let returnFalsy = (total, item) =>{
             callCount++;
@@ -292,7 +292,7 @@ describe('Library', () => {
           expect(total).to.equal(3);
         });
   
-        it('should pass every item of the array into the iterator if a memo is passed in', () => {
+        xit('should pass every item of the array into the iterator if a memo is passed in', () => {
           let result = _.reduce([1, 2, 3], (memo, item) =>{
             return memo - item;
           }, 10);
@@ -300,7 +300,7 @@ describe('Library', () => {
           expect(result).to.equal(4);
         });
   
-        it('Fill me in with a description of the behavior this test is checking for', () => {
+        xit('Fill me in with a description of the behavior this test is checking for', () => {
           let result = _.reduce([1, 2, 3], (memo, item) =>{
             return memo * item;
           }, 0);
@@ -308,7 +308,7 @@ describe('Library', () => {
           expect(result).to.equal(0);
         });
   
-        it('should set memo to be the first item of the array if no memo is passed in', () => {
+        xit('should set memo to be the first item of the array if no memo is passed in', () => {
           let result = _.reduce([1, 2, 3], (memo, item) =>{
             return memo;
           });
@@ -317,7 +317,7 @@ describe('Library', () => {
         });
   
   
-        it('should pass the second item of the array into the iterator first if a memo is not passed in', () => {
+        xit('should pass the second item of the array into the iterator first if a memo is not passed in', () => {
           let result = _.reduce([3, 2, 1], (memo, item) =>{
             return memo - item;
           });
